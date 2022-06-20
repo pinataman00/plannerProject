@@ -31,6 +31,8 @@ public class SaveLogServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		//TODO DB에 플랜 저장 後, 플랜 저장 완료 페이지로 이동함
+		//DB에서 리스트를 가져올지, localStorage를 다시 사용할지 고민 중
 		
 		//1. 플래너 정보 저장하기   ------------------------------------------------------------------------------
 		
@@ -48,26 +50,37 @@ public class SaveLogServlet extends HttpServlet {
 		
 		list.add(plan); //list에 추가하기
 
+		
 		for (PlannerLog plannerLog : list) {
 
-			System.out.println(plannerLog);
+			System.out.println("잘 넘어왔나 확인 : "+plannerLog);
 		}
 				
 		System.out.println(list.size());
-		//-----------------------------------------------------------------------------------------------------
+
+		//plan을 DB에 INSERT하기 > 한 번 넘어올 때마다 해당 서블릿을 호출하고, savePlan()메소드도 실행해서 안 됨!
+		int res = new PlannerService().savePlan(list);
+		
+		
+		
+		String msg,loc=""; //TODO msg, loc부분 만들어야 함
+		if(res>0) {
+			msg = "플랜 저장 성공!";
+			loc = "/"; //플랜 페이지로 돌아가기
+			
+			System.out.println("저장 성공!");
+			
+		} else {
+			msg = "플랜 저장에 실패했습니다. 다시 시도해주세요!";
+			loc = "/";
+			
+			System.out.println("저장 실패!");
+			
+		}
+		
+		
 		
 
-		/*
-		 * for (PlannerLog p : list) {
-		 * 
-		 * int res = new PlannerService().insertPlan(p); if(res<=0) {
-		 * System.out.println("문제가 발생했습니다."); break; }
-		 * 
-		 * }
-		 */
-		
-		//DB에 플랜 저장 後, 플랜 저장 완료 페이지로 이동함
-		//DB에서 리스트를 가져올지, localStorage를 다시 사용할지 고민 중
 		
 		
 	}
