@@ -542,12 +542,9 @@ function addMarkerFunc(lat,lng,placeName){
     
     
     myMarkers.push(marker);
-    //return myMarkers;
-    console.log("이만큼 만들었어!", myMarkers);
-
+    
 }    
 
-console.log("이만큼 만들었어! 여기서는 왜 확인이 안 될까?", myMarkers);
 
 
 

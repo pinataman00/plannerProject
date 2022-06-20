@@ -74,7 +74,7 @@
 <meta charset="UTF-8">
 <title>planner</title>
 
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/plannerStyle.css"/>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@1,800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>

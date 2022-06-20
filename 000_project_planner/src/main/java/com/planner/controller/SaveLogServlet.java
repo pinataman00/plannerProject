@@ -45,6 +45,7 @@ public class SaveLogServlet extends HttpServlet {
 		PlannerLog plan = gson.fromJson(jsonStr, PlannerLog.class);
 		//System.out.println(plan);
 		
+		
 		list.add(plan); //list에 추가하기
 
 		for (PlannerLog plannerLog : list) {
@@ -55,6 +56,7 @@ public class SaveLogServlet extends HttpServlet {
 		System.out.println(list.size());
 		//-----------------------------------------------------------------------------------------------------
 		
+
 		/*
 		 * for (PlannerLog p : list) {
 		 * 
