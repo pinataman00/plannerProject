@@ -489,6 +489,7 @@
  	            				
  	            				
  	            				//localStorage 반복문!
+ 	            				//fetch사용함
 	            				
 	            				let jsonData = "";
 	            				let tempArr = [];
