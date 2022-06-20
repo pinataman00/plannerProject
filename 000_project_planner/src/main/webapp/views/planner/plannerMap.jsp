@@ -202,7 +202,6 @@ var customContent = '<div class="wrap">' +
 	//-------------------------------------------------------------------
 
 	//장소 카드의 "속성"을 새로 생성해, 해당 장소의 정보를 저장하기--------------------
-	//console.log("////////////////////!!!!!!!>..???////////", nowCho);
 	addPlan.setAttribute("day",nowCho);
 	addPlan.setAttribute("id",addPlan.id);
 	addPlan.setAttribute("placeName",placeName);
@@ -210,15 +209,15 @@ var customContent = '<div class="wrap">' +
 	addPlan.setAttribute("longitude",lng);
 	addPlan.setAttribute("memo",memo);
 	//"속성"이 잘 저장됐는지, 확인하기-------------------------------------------
-	console.log("속성 > 아이디 : ", addPlan.getAttribute("id"));
+/* 	console.log("속성 > 아이디 : ", addPlan.getAttribute("id"));
 	console.log("속성 > 장소명 : ", addPlan.getAttribute("placeName"));
 	console.log("속성 > 위도 : ", addPlan.getAttribute("latitude"));
 	console.log("속성 > 경도 : ", addPlan.getAttribute("longitude"));
-	console.log("속성 > 메모 : ", addPlan.getAttribute("memo"));
+	console.log("속성 > 메모 : ", addPlan.getAttribute("memo")); */
 	//--------------------------------------------------------------------
 	
 	
-	deletePlace(addPlan); //더블클릭 시, 삭제됨
+	deletePlace(addPlan); //더블클릭 시, 편집 시점에 생성된 마커와 카드가 삭제됨
 	//deletePlaceMarker(addPlan);
 	moveMap(addPlan);
 } 
@@ -530,15 +529,6 @@ function addMarkerFunc(lat,lng,placeName){
         image : markerImage // 마커 이미지 
     });
     
-    
-    //TODO) 0618 : 특정 일자에 제조된 마커만을 따로 저장할 수는 없을까?
-    //별도로 저장할 수 있다면, 옵션 전환 시, 전일에 체크한 마커는 지도에서 안 보이게 설정할 수 있을 텐데!
-    //console.log("/////////현재 날짜를 확인할 수 있을까?", nowCho);
-    //const ckDay = document.getElementById("daysOption").value;
-    //console.log("/////////////////////",ckDay);
-    //marker.setAttribute("madeByDay",ckDay); //TODO 0618) 마커에 만들어진 날짜를 속성으로 부여하기
-    //console.log("가져올 수 있나?", marker.getAttribute("madeByDay"));
-    //const mfgDate = ("documentGe")
     
     
     myMarkers.push(marker);
