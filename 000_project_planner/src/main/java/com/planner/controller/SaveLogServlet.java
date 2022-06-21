@@ -94,11 +94,11 @@ public class SaveLogServlet extends HttpServlet {
 
 		String jsonStr = request.getParameter("planPerDay");
 		Gson gson = new Gson();
-		PlannerLog[][] planners = gson.fromJson(jsonStr, PlannerLog[][].class);
+		PlannerLog[][] plans = gson.fromJson(jsonStr, PlannerLog[][].class);
 
 		int res = 0;
 
-		for (PlannerLog[] plannerLogs : planners) {
+		for (PlannerLog[] plannerLogs : plans) {
 			
 			for (PlannerLog plannerLogs2 : plannerLogs) {
 				System.out.println("저장된 플랜 확인"+plannerLogs2);
@@ -107,20 +107,19 @@ public class SaveLogServlet extends HttpServlet {
 			
 			//반복문을 controller차원에서 실행하는 건가?
 			//res = new PlannerService().savePlan(plannerLogs);
-			res = new PlannerService().savePlanner(planner,plannerLogs);
-
+			
 		}
 		
 		
 		
 		//int result = new PlannerService().savePlanner(planner);
-		
+		res = new PlannerService().savePlanner(planner,plans);
 		
 		
 		// ------------------------------------------------------------------------------	
 		
 		
-		if (res<0) {
+		if (res<=0) {
 			System.out.println("플래너 저장 실패!");
 		} else {
 			System.out.println("플래너 저장 성공!");

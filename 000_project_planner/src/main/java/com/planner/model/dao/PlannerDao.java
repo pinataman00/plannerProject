@@ -41,12 +41,15 @@ public class PlannerDao {
 		try {
 			
 			pstmt = conn.prepareStatement(prop.getProperty("savePlanner"));
+			
 			pstmt.setString(1, planner.getUserId());
 			pstmt.setString(2, planner.getPlannerTitle());
 			pstmt.setInt(3, planner.getTravelDays());
-			pstmt.setString(4,planner.getTheme());
-			pstmt.setInt(5, planner.getAreacode());
-			pstmt.setInt(6, planner.getSigungucode());
+			pstmt.setString(4, planner.getImages());
+			pstmt.setString(5,planner.getTheme());
+			pstmt.setInt(6, planner.getAreacode());
+			pstmt.setInt(7, planner.getSigungucode());
+			pstmt.setInt(8, planner.getScore());
 			
 			res = pstmt.executeUpdate();
 			
@@ -57,7 +60,7 @@ public class PlannerDao {
 			close(pstmt);
 		}
 		
-		return 0;
+		return res;
 	}
 	
 	
@@ -69,7 +72,7 @@ public class PlannerDao {
 		try {
 			
 			pstmt = conn.prepareStatement(prop.getProperty("savePlan"));
-			pstmt.setString(1, null);
+			pstmt.setString(1, "PLAN"+plannerNo);
 			pstmt.setString(2, p.getDay());
 			pstmt.setString(3, p.getLatitude());
 			pstmt.setString(4, p.getLongitude());
@@ -91,10 +94,30 @@ public class PlannerDao {
 	}
 
 
-	public int selectPlannerNo() {
+	public int selectPlannerNo(Connection conn) {
 
-		int 
-		return 0;
+		int plannerNo=0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+		
+			pstmt = conn.prepareStatement(prop.getProperty("selectPlannerNo"));
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				plannerNo = rs.getInt(1);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return plannerNo;
 	}
 
 

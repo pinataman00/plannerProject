@@ -11,7 +11,7 @@ import lombok.Data;
 public class Planner {
 
 
-	private String plannerNo;
+	private int plannerNo;
 	private String userId;
 	private String plannerTitle;
 	private int travelDays;
