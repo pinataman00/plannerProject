@@ -37,11 +37,16 @@ public class PlannerMakerServlet extends HttpServlet {
 		response.addCookie(forTheme);
 		
 		//작성자 정의 "제목" 정보를 넘기고자 함
+		//TODO 0621 > 공백이 포함되어 있으면 오류 발생함 -> 쿠키(x) RequestDispatcher로 데이터를 넘기고자 함
 		String title = request.getParameter("plannerTitle");
-		Cookie forTitle = new Cookie("forTitle",title);
-		forTitle.setMaxAge(24*60*60);
-		response.addCookie(forTitle);
+//		Cookie forTitle = new Cookie("forTitle",title);
+//		forTitle.setMaxAge(24*60*60);
+//		response.addCookie(forTitle);
 		
+		
+		request.setAttribute("plannerTitle", title);
+		//System.out.println("타이틀 확인 : "+request.getAttribute("plannerTitle"));
+				
 		//작성자 정의 "주요 방문 지역" 정보를 넘기고자 함
 		//1. 지역코드 > 대분류
 		String area = request.getParameter("area");
@@ -54,8 +59,8 @@ public class PlannerMakerServlet extends HttpServlet {
 		forSigungu.setMaxAge(24*60*60);
 		response.addCookie(forSigungu);
 		
-		response.sendRedirect(request.getContextPath()+"/views/planner/plannerMain.jsp");
-		
+		//response.sendRedirect(request.getContextPath()+"/views/planner/plannerMain.jsp");
+		request.getRequestDispatcher("/views/planner/plannerMain.jsp").forward(request, response);
 		//-----------------------------------------------------------------------------------
 
 		

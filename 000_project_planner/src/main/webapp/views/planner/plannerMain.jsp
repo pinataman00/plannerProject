@@ -5,10 +5,7 @@
 
 	//쿠키 사용 後
 	int days=0;
-	String theme = "";
-	String title = "";
-	int area = 0;
-	int sigungu = 0;
+
 	
 	Cookie[]cookies = request.getCookies();
 	if(cookies!=null){
@@ -17,28 +14,12 @@
 			
 			if(c.getName().equals("forOption")){ //여행 일자
 				days = Integer.parseInt(c.getValue());				
-			}
-			
-			if(c.getName().equals("forTheme")){ //여행 테마
-				theme = c.getValue();
-			}
-			
-			if(c.getName().equals("forTitle")){ //플랜 제목
-				title = c.getValue();
-			}
-			
-			if(c.getName().equals("forArea")){ //여행 일자
-				area = Integer.parseInt(c.getValue());				
-			}
-			
-			if(c.getName().equals("forSigungu")){ //여행 일자
-				sigungu = Integer.parseInt(c.getValue());			
-			}
-			
+			}			
 		}		
 	}
 	
-	
+	String plannerTitle = (String)request.getAttribute("plannerTitle");
+	System.out.println("타이틀 확인 : "+plannerTitle);
 	
 	//localStorage 사용 前 -------------------------------------
 	int fromDate=0;
@@ -63,8 +44,7 @@
 	//---------------------------------------------------------
 	//0614 > "새로고침"할 경우, "localStorage"의 저장 데이터는 유지되나, 
 	//화면 상에서는 1번째 날의 계획이 리셋됨... 그리고 화면상에서 데이터가 리셋된 채로 option값을 이동하게 되면 실제 localStorage값도 리셋됨! 
-	
-	
+
 	
 %>
 
@@ -142,11 +122,7 @@
 	         	 </div>
  	     	     	<%@include file="/views/planner/plannerMap.jsp" %> 
 	   			 </div>
-
-
-	    
-	    
-	    	          		
+    	          		
 	            		<script>
 	            		
 	            		
@@ -438,11 +414,15 @@
 			            			console.log("현재 편집한 일정이 잘 저장됐는지 확인 : "
 			            					    ,JSON.parse(localStorage.getItem(preCho)));
 			            			
+			            			
+			            			
 	            			});
 	            			
 	            			</script>
-	            			
-          			
+
+
+
+          						
 	            			<script>
 	            			//플래너 작성내용 저장||삭제 기능 구현--------------------------------------------------
 	            			
@@ -461,31 +441,10 @@
 	            			
 	            				alert("저장하시겠습니까?"); 
 	            			
-				
-<%-- 	            			tempArr = JSON.parse(localStorage.getItem(1));
-	            				console.log(tempArr); //첫 번째 날
+
 	            				
-	            				let jsonData = JSON.stringify(tempArr[0]); //첫 번째 방문장소
-	            				console.log(jsonData);
-	            				
-            				
- 	            				$.ajax({
-	            					
-	            					url : "<%=request.getContextPath()%>/planner/saveLog.do",
-	            					type : "get",
-	            					data : {"jsonData" : jsonData}, 
-	            					dataType : "json",
-	            					contentType : "application/json",
-	            					success : function(data){
-	            						console.log("저장 완료");
-	            					}, 
-	            					error : function(data){
-	            						console.log("저장 실패");
-	            					}
-	            					
-	            				});  --%>
- 	            				
- 	            				
+ 				
+ 	            				//-------------------------------------------------------------------
  	            				//localStorage 반복문!
  	            				//fetch사용함!
 	            				
@@ -499,12 +458,12 @@
  	            				
  	            				console.dir('tempArr : ' + JSON.stringify(tempArr));
  	            				
- 	            				fetch("<%=request.getContextPath()%>/planner/saveLog.do", {
+ 	            				fetch("<%=request.getContextPath()%>/planner/saveLog.do?plannerTitle=<%=plannerTitle%>", {
  									  method: 'POST', // 또는 'PUT'
  									  headers: {
  									    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
  									  },
- 									  body: 'planPerDay=' + encodeURIComponent('['+tempArr+']'),
+ 									  body: 'planPerDay=' + encodeURIComponent('['+tempArr+']'), 
  									})
  									.then((response) => response.json())
  									.then((data) => {
