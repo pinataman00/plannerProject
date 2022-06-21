@@ -458,12 +458,10 @@
 	            			}
 	            			
 	            			const saveSchedule = ()=> { //TODO 0619) AJAX로 객체배열 전송하기
+	            			
 	            				alert("저장하시겠습니까?"); 
 	            			
-	            				
-	            				
-
-	            				
+				
 <%-- 	            			tempArr = JSON.parse(localStorage.getItem(1));
 	            				console.log(tempArr); //첫 번째 날
 	            				
