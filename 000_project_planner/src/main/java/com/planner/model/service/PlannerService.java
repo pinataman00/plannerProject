@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.jasper.tagplugins.jstl.core.ForEach;
 
 import com.planner.model.dao.PlannerDao;
+import com.planner.model.vo.Planner;
 import com.planner.model.vo.PlannerLog;
 
 import static com.common.JDBCTemplate.getConnection;
@@ -22,23 +23,31 @@ public class PlannerService {
 		Connection conn = getConnection();
 
 		int res = 0;
-		
-		/*
-		 * for (PlannerLog p : plannerLogs2) {
-		 * 
-		 * res = dao.savePlan(p, conn);
-		 * 
-		 * if(res>0) { commit(conn); } else { rollback(conn); }
-		 */
-			
-		//}
 
-		for(int i=0;i<plannerLogs.length;i++) {
-			
-			res = dao.savePlan(plannerLogs[i], conn);
-		
+		for(int i=0;i<plannerLogs.length;i++) {			
+			res = dao.savePlan(plannerLogs[i], conn);		
 		}
-	
+		if(res>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return res;
+	}
+
+
+	public int savePlanner(Planner planner) {
+		
+		Connection conn = getConnection();
+		int res = 0;
+		res = dao.savePlanner(planner,conn);
+		
+		if(res>0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
 		close(conn);
 		return res;
 	}

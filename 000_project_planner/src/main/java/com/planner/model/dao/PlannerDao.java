@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import com.planner.model.vo.Planner;
 import com.planner.model.vo.PlannerLog;
 import static com.common.JDBCTemplate.close;
 
@@ -28,7 +29,7 @@ public class PlannerDao {
 		
 	}
 
-	public int savePlan(PlannerLog p, Connection conn) {
+	public int savePlan(PlannerLog p, Connection conn) { //PLAN테이블 저장 메소드
 
 		PreparedStatement pstmt = null;
 		int res = 0;
@@ -53,6 +54,25 @@ public class PlannerDao {
 		
 		
 		return res;
+	}
+
+	public int savePlanner(Planner planner, Connection conn) {
+		
+		PreparedStatement pstmt = null;
+		int res = 0;
+		
+		try {
+			
+			pstmt = conn.prepareStatement(prop.getProperty("savePlanner"));
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return 0;
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.planner.model.vo;
 
 import lombok.Builder;
+
 import lombok.Data;
 
 @Builder

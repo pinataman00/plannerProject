@@ -37,7 +37,7 @@ public class PlannerMakerServlet extends HttpServlet {
 		response.addCookie(forTheme);
 		
 		//작성자 정의 "제목" 정보를 넘기고자 함
-		String title = request.getParameter("title");
+		String title = request.getParameter("plannerTitle");
 		Cookie forTitle = new Cookie("forTitle",title);
 		forTitle.setMaxAge(24*60*60);
 		response.addCookie(forTitle);
